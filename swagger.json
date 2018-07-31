@@ -1,0 +1,1009 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "E-pharma API Documentation",
+    "description": "E-pharma App REST API Documentation",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "https://www.app.cuufy.com:6106",
+  "basePath": "/api/v1",
+  "tags": [
+    {
+      "name": "E-pharma",
+      "description": "API in the system"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "securityDefinitions": {
+    "UserSecurity": {
+      "type": "apiKey",
+      "name": "X-Access-Token",
+      "in": "header"
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/vendors": {
+      "post": {
+        "tags": [
+          "Venodr SignUp"
+        ],
+        "description": "Create new vendor in system",
+        "parameters": [
+          {
+            "name": "vendor",
+            "in": "body",
+            "description": "Vendor that we want to create",
+            "schema": {
+              "$ref": "#/definitions/Vendor"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Your registration request has been received, we'll contact you shortly.",
+            "schema": {
+              "$ref": "#/definitions/VendorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/authenticate": {
+      "post": {
+        "tags": [
+          "Vendor Authentication"
+        ],
+        "description": "Authenticate user in system",
+        "parameters": [
+          {
+            "name": "vendor",
+            "in": "body",
+            "description": "Vendor that we want to authenticate",
+            "schema": {
+              "$ref": "#/definitions/UserAuth"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Authenticated successfully.",
+            "schema": {
+              "$ref": "#/definitions/UserAuthResponse"
+            }
+          }
+        }
+      }
+    },
+    "/vendors/verify-token": {
+      "post": {
+        "tags": [
+          "Verify Vendor token Before SignUp"
+        ],
+        "description": "Verify Vendor token Before SignUp",
+        "parameters": [
+          {
+            "name": "vendor",
+            "in": "body",
+            "description": "Verify Vendor token Before SignUp",
+            "schema": {
+              "$ref": "#/definitions/TokenVerify"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Your registration has been verified successfully.",
+            "schema": {
+              "$ref": "#/definitions/TokenVerifyResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/guest-user-auth": {
+      "post": {
+        "tags": [
+          "Authenticate Guest User"
+        ],
+        "description": "Authenticate guest user with device ID",
+        "parameters": [
+          {
+            "name": "guestuser",
+            "in": "body",
+            "description": "Authenticate guest user with device ID",
+            "schema": {
+              "$ref": "#/definitions/AuthGuestUser"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Code has been successfully generated.",
+            "schema": {
+              "$ref": "#/definitions/AuthGuestUserResponse"
+            }
+          }
+        }
+      }
+    },
+    "/vendors-medicines/get-vendor-medicine/:id": {
+      "get": {
+        "tags": [
+          "Get Single Medicine by id"
+        ],
+        "description": "Get Single Medicine by id",
+        "parameters": [
+          {
+            "name": "ID",
+            "in": "body",
+            "description": "Get Single Medicine details by id",
+            "schema": {
+              "$ref": "#/definitions/SingleMedicineById"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Medicine Details are listed here.",
+            "schema": {
+              "$ref": "#/definitions/SingleMedicineByIdResponse"
+            }
+          }
+        }
+      }
+    },
+    "/vendors-medicines/get-category-medicines/:category": {
+      "get": {
+        "tags": [
+          "Get All Medicines by category id"
+        ],
+        "description": "Get All Medicines by category id",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "body",
+            "description": "Get All Medicines by category id",
+            "schema": {
+              "$ref": "#/definitions/AllMedicineByCategoryId"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Medicine related to this category are listed here.",
+            "schema": {
+              "$ref": "#/definitions/AllMedicineByCategoryIdResponse"
+            }
+          }
+        }
+      }
+    },
+    "/vendors-medicines/get-medicine-categories": {
+      "get": {
+        "tags": [
+          "Get All categorys"
+        ],
+        "description": "Get All categories of Medicines",
+        "parameters": [
+          {
+            "name": "Categories",
+            "in": "body",
+            "description": "Get All categories of Medicines",
+            "schema": {
+              "$ref": "#/definitions/GetMedicineCategories"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "All categories are listed.",
+            "schema": {
+              "$ref": "#/definitions/GetMedicineCategoriesResponse"
+            }
+          }
+        }
+      }
+    },
+
+    "/vendors-medicines/add": {
+      "post": {
+        "tags": [
+          "Add Medicine Post Request API"
+        ],
+        "description": "This API will Add vendors medicine",
+        "parameters": [
+          {
+            "name": "Medicine",
+            "in": "body",
+            "description": "Add Medicine",
+            "schema": {
+              "$ref": "#/definitions/VendorMedicineAdd"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Your Medicine has been saved successfully.",
+            "schema": {
+              "$ref": "#/definitions/VendorMedicineAddResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/change-password": {
+      "post": {
+        "tags": [
+          "Change Password Post Request API"
+        ],
+        "description": "This API will change the password of user",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "Change Password",
+            "schema": {
+              "$ref": "#/definitions/ChangePassword"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Password been successfully changed.",
+            "schema": {
+              "$ref": "#/definitions/ChangePasswordResponse"
+            }
+          }
+        }
+      }
+    },
+    "/vendors/profile": {
+      "post": {
+        "tags": [
+          "update profile Post Request API"
+        ],
+        "description": "This API will update profile of user",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "body",
+            "description": "Update Profile",
+            "schema": {
+              "$ref": "#/definitions/UpdateProfile"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Your profile has been successfully updated",
+            "schema": {
+              "$ref": "#/definitions/UpdateProfileResponse"
+            }
+          }
+        }
+      }
+    },
+    "/media/": {
+      "post": {
+        "tags": [
+          "Upload Docs Post Request API"
+        ],
+        "description": "This API will upload Documents of Vendor",
+        "parameters": [
+          {
+            "name": "file",
+            "in": "body",
+            "description": "file (with key parameter my-file)",
+            "schema": {
+              "$ref": "#/definitions/Media"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "File uploaded successfully.",
+            "schema": {
+              "$ref": "#/definitions/MediaResponse"
+            }
+          }
+        }
+      }
+    },
+    "/users/profile-picture": {
+      "post": {
+        "tags": [
+          "User Profile Picture Upload Post Request API"
+        ],
+        "description": "This API will upload Profile Picture of user",
+        "parameters": [
+          {
+            "name": "file",
+            "in": "body",
+            "description": "file (with key parameter profile_picture)",
+            "schema": {
+              "$ref": "#/definitions/ProfilePictureUpload"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "File uploaded successfully.",
+            "schema": {
+              "$ref": "#/definitions/ProfilePictureUploadResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/cart": {
+      "get": {
+        "tags": [
+          "View cart API Post Request API"
+        ],
+        "description": "This API will veiw cart",
+        "parameters": [
+          {
+            "vendor name" : "file",
+            "in"          : "body",
+            "description" : "vendor name",
+            "schema": {
+              "$ref": "#/definitions/VeiwCart"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Loaded cart items successfully.",
+            "schema": {
+              "$ref": "#/definitions/VeiwCartResponse"
+            }
+          }
+        }
+      }
+    },
+    "/cart/item/vendor-medicine-id": {
+      "put": {
+        "tags": [
+          "Update item quantity in cart api put Request API"
+        ],
+        "description": "This API will Update item quantity in cart",
+        "parameters": [
+          {
+            "name": "quantity",
+            "in": "body",
+            "description": "Update quantity",
+            "schema": {
+              "$ref": "#/definitions/UpdateCartQuantity"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Item quantity updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/UpdateCartQuantityResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Vendor": {
+      "required": [
+        "pharmacy_name",
+        "contact_number",
+        "user_email",
+        "user_password"
+      ],
+      "properties": {
+        "pharmacy_name": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "contact_number": {
+          "type": "string"
+        },
+        "user_email": {
+          "type": "email"
+        },
+        "user_password": {
+          "type": "string"
+        }
+      }
+    },
+    "VendorMedicineAdd": {
+      "required": [
+        "medicine_name",
+        "strength",
+        "strength_unit",
+        "price",
+        "volume",
+        "volume_unit",
+        "category",
+        "special_offers",
+        "drug_reg_num",
+        "vendor_name",
+        "vendor_phone_no",
+        "active_substance_1",
+        "active_substance_2",
+        "active_substance_3",
+        "active_substance_4",
+        "mah_name"
+      ],
+      "properties": {
+        "medicine_name": {
+          "type": "string"
+        },
+        "strength": {
+          "type": "string"
+        },
+        "strength_unit": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string"
+        },
+        "volume": {
+          "type": "string"
+        },
+        "volume_unit": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "special_offers": {
+          "type": "string"
+        },
+        "drug_reg_num": {
+          "type": "string"
+        },
+        "vendor_name": {
+          "type": "string"
+        },
+        "vendor_phone_no": {
+          "type": "string"
+        },
+        "active_substance_1": {
+          "type": "string"
+        },
+        "active_substance_2": {
+          "type": "string"
+        },
+        "active_substance_3": {
+          "type": "string"
+        },
+        "active_substance_4": {
+          "type": "string"
+        },
+        "mah_name": {
+          "type": "string"
+        }
+      }
+    },
+    "VendorMedicineAddResponse": {
+      "required": [
+        "medicine_name",
+        "medicine_id"
+      ],
+      "properties": {
+        "medicine_name": {
+          "type": "string"
+        },
+        "medicine_id": {
+          "type": "string"
+        }
+      }
+    },
+    "VendorResponse": {
+      "required": [
+        "user_email",
+        "user_id",
+        "token"
+      ],
+      "properties": {
+        "user_email": {
+          "type": "string",
+          "uniqueItems": true
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "token": {
+          "type": "email"
+        }
+      }
+    },
+    "Users": {
+      "type": "array",
+      "$ref": "#/definitions/Vendor"
+    },
+    "UserAuth": {
+      "required": [
+        "user_email",
+        "user_password"
+      ],
+      "properties": {
+        "user_email": {
+          "type": "string"
+        },
+        "user_password": {
+          "type": "string"
+        }
+      }
+    },
+    "UserAuthResponse": {
+      "required": [
+        "user_id",
+        "is_activated",
+        "user_type",
+        "user_email",
+        "vendor_name",
+        "contact_number",
+        "profile_picture",
+        "profile_picture_50x50",
+        "token"
+      ],
+      "properties": {
+        "user_id": {
+          "type": "string"
+        },
+        "is_activated": {
+          "type": "string"
+        },
+        "user_type": {
+          "type": "string"
+        },
+        "user_email": {
+          "type": "string"
+        },
+        "vendor_name": {
+          "type": "string"
+        },
+        "contact_number": {
+          "type": "string"
+        },
+        "profile_picture": {
+          "type": "string"
+        },
+        "profile_picture_50x50": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "UsersAuth": {
+      "type": "array",
+      "$ref": "#/definitions/UserAuth"
+    },
+    "SingleMedicineById": {
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      }
+    },
+    "SingleMedicineByIdResponse": {
+      "required": [
+        "medicine_name",
+        "drug_reg_num",
+        "vendor_id",
+        "strength",
+        "strength_unit",
+        "in_stock",
+        "price",
+        "volume",
+        "volume_unit",
+        "category",
+        "special_offers",
+        "active_substance_1",
+        "active_substance_2",
+        "active_substance_3",
+        "active_substance_4",
+        "mah_name",
+        "vendor_name",
+        "vendor_phone_no"
+      ],
+      "properties": {
+        "medicine_name": {
+          "type": "string"
+        },
+        "drug_reg_num": {
+          "type": "string"
+        },
+        "vendor_id": {
+          "type": "string"
+        },
+        "strength": {
+          "type": "string"
+        },
+        "strength_unit": {
+          "type": "string"
+        },
+        "in_stock": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string"
+        },
+        "volume": {
+          "type": "string"
+        },
+        "volume_unit": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "special_offers": {
+          "type": "string"
+        },
+        "active_substance_1": {
+          "type": "string"
+        },
+        "active_substance_2": {
+          "type": "string"
+        },
+        "active_substance_3": {
+          "type": "string"
+        },
+        "active_substance_4": {
+          "type": "string"
+        },
+        "mah_name": {
+          "type": "string"
+        },
+        "vendor_name": {
+          "type": "string"
+        },
+        "vendor_phone_no": {
+          "type": "string"
+        }
+      }
+    },
+    "TokenVerify": {
+      "required": [
+        "email_verification_code"
+      ],
+      "properties": {
+        "email_verification_code": {
+          "type": "string"
+        }
+      }
+    },
+    "TokenVerifyResponse": {
+      "required": [
+        "user_id"
+      ],
+      "properties": {
+        "user_id": {
+          "type": "string"
+        }
+      }
+    },
+    "AuthGuestUser": {
+      "required": [
+        "device_id"
+      ],
+      "properties": {
+        "device_id": {
+          "type": "string"
+        }
+      }
+    },
+    "AuthGuestUserResponse": {
+      "required": [
+        "user_id",
+        "user_type",
+        "device_id",
+        "token"
+      ],
+      "properties": {
+        "user_id": {
+          "type": "string"
+        },
+        "user_type": {
+          "type": "string"
+        },
+        "device_id": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "AllMedicineByCategoryId": {
+      "required": [
+        "category"
+      ],
+      "properties": {
+        "category": {
+          "type": "string"
+        }
+      }
+    },
+    "AllMedicineByCategoryIdResponse": {
+      "required": [
+        "medicine_name",
+        "_id",
+        "category",
+        "strength",
+        "strength_unit",
+        "in_stock",
+        "price",
+        "special_offers",
+        "vendor_name",
+        "vendor_phone_no",
+        "volume_unit",
+        "volume",
+        "active_substance_1",
+        "active_substance_2",
+        "active_substance_3",
+        "active_substance_4"
+      ],
+      "properties": {
+        "medicine_name": {
+          "type": "string"
+        },
+        "_id": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "strength": {
+          "type": "string"
+        },
+        "strength_unit": {
+          "type": "string"
+        },
+        "in_stock": {
+          "type": "string"
+        },
+        "price": {
+          "type": "string"
+        },
+        "special_offers": {
+          "type": "string"
+        },
+        "vendor_name": {
+          "type": "string"
+        },
+        "vendor_phone_no": {
+          "type": "string"
+        },
+        "volume_unit": {
+          "type": "string"
+        },
+        "volume": {
+          "type": "string"
+        },
+        "active_substance_1": {
+          "type": "string"
+        },
+        "active_substance_2": {
+          "type": "string"
+        },
+        "active_substance_3": {
+          "type": "string"
+        },
+        "active_substance_4": {
+          "type": "string"
+        }
+      }
+    },
+    "ChangePassword": {
+      "required": [
+        "current_password",
+        "new_password",
+        "confirm_password"
+      ],
+      "properties": {
+        "current_password": {
+          "type": "string"
+        },
+        "new_password": {
+          "type": "string"
+        },
+        "confirm_password": {
+          "type": "string"
+        }
+      }
+    },
+    "UpdateProfile": {
+      "required": [
+        "pharmacy_name"
+      ],
+      "properties": {
+        "pharmacy_name": {
+          "type": "string"
+        }
+      }
+    },
+    "GetMedicineCategoriesResponse": {
+      "required": [
+        "_id",
+        "category_name",
+        "url"
+      ],
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "category_name": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "Media": {
+      "required": [
+        "file"
+      ],
+      "properties": {
+        "file": {
+          "type": "string"
+        }
+      }
+    },
+    "MediaResponse": {
+      "required": [
+        "media_id",
+        "file_url",
+        "mime_type",
+        "file_name"
+      ],
+      "properties": {
+        "media_id": {
+          "type": "string"
+        },
+        "file_url": {
+          "type": "string"
+        },
+        "mime_type": {
+          "type": "string"
+        },
+        "file_name": {
+          "type": "string"
+        }
+      }
+    },
+    "ProfilePictureUpload": {
+      "required": [
+        "profile_picture"
+      ],
+      "properties": {
+        "profile_picture": {
+          "type": "string"
+        }
+      }
+    },
+    "ProfilePictureUploadResponse": {
+      "required": [
+        "profile_picture",
+        "profile_picture_50x50"
+      ],
+      "properties": {
+        "profile_picture": {
+          "type": "string"
+        },
+        "profile_picture_50x50": {
+          "type": "string"
+        }
+      }
+    },
+    "VeiwCart": {
+      "required": [
+      ],
+      "properties": {
+        
+      }
+    },
+    "VeiwCartResponse": {
+      "required": [
+        "vendor_id",
+        "vendor_phone_no",
+        "vendor_location",
+        "vendor_name",
+        "products"
+      ],
+      "properties": {
+        "vendor_id": {
+          "type": "string"
+        },
+        "vendor_phone_no": {
+          "type": "string"
+        },
+        "vendor_location": {
+          "type": "string"
+        },
+        "vendor_name": {
+          "type": "string"
+        },
+        "products": {
+          "type": "string"
+        }
+      }
+    },
+    "UpdateCartQuantity": {
+      "required": [
+        "quantity"
+      ],
+      "properties": {
+        "quantity": {
+          "type": "string"
+        }
+      }
+    },
+    "UpdateCartQuantityResponse": {
+      "required": [
+      ],
+      "properties": {
+      }
+    }
+  }
+}
