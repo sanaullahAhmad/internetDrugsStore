@@ -1,0 +1,15 @@
+
+npm run start
+
+ ./mongod --dbpath ~/mongo-data
+
+register here as post 
+http://localhost:6106/api/v1/vendors
+
+http://localhost:6106/api/v1/users
+
+note controller reservation.js line number 636 await is commented due to ascyc error
+
+
+for api documentation access this swagger url
+http://localhost:6106/api-docs/
